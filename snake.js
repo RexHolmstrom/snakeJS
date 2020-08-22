@@ -11,7 +11,10 @@ let snake = [
   { x: 160, y: 200 },
 ];
 
+let score = 0;
 let changing_direction = false;
+let food_y;
+let food_x;
 let dx = 10;
 let dy = 0;
 
@@ -19,6 +22,7 @@ let dy = 0;
 const snakeboard = document.getElementById("snakeboard");
 const snakeboard_ctx = snakeboard.getContext("2d");
 main();
+gen_food();
 
 document.addEventListener("keydown", change_direction);
 
@@ -28,6 +32,7 @@ function main() {
   changing_direction = false;
   setTimeout(function onTick() {
     clear_board();
+    drawFood();
     move_snake();
     drawSnake();
     // Call main again
@@ -49,6 +54,13 @@ function drawSnake() {
   snake.forEach(drawSnakePart);
 }
 
+function drawFood() {
+  snakeboard_ctx.fillStyle = "lightgreen";
+  snakeboard_ctx.strokestyle = "darkgreen";
+  snakeboard_ctx.fillRect(food_x, food_y, 10, 10);
+  snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
+}
+
 // Draw one snake part
 function drawSnakePart(snakePart) {
   snakeboard_ctx.fillStyle = snake_col;
@@ -66,6 +78,19 @@ function has_game_ended() {
   const hitToptWall = snake[0].y < 0;
   const hitBottomWall = snake[0].y > snakeboard.height - 10;
   return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+}
+
+function random_food(min, max) {
+  return (Math.round(Math.random() * (min - max) + min) / 10) * 10;
+}
+
+function gen_food() {
+  food_x = random_food(0, snakeboard.width - 10);
+  food_y = random_food(0, snakeboard.height - 10);
+  snake.forEach(function has_snake_eaten_food(part) {
+    const has_eaten = part.x == food_x && part.y == food.y;
+    if (has_eaten) gen_food();
+  });
 }
 
 function change_direction(event) {
@@ -104,5 +129,20 @@ function change_direction(event) {
 function move_snake() {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy };
   snake.unshift(head);
-  snake.pop();
+
+  const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
+  if (has_eaten_food) {
+    score += 10;
+    document.getElementById("score").innerHTML = score;
+    gen_food();
+  } else {
+    snake.pop();
+  }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  pTag = document.querySelector("div");
+  newVal = document.createElement("p");
+  newVal.innerHTML = "";
+  pTag.appendChild(newVal);
+});
