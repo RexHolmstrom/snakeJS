@@ -35,7 +35,7 @@ function main() {
   }, 100);
 }
 
-// draw a border around the canvas
+// Draw a border around the canvas
 function clear_board() {
   //  Select the colour to fill the drawing
   snakeboard_ctx.fillStyle = board_background;
@@ -45,7 +45,6 @@ function clear_board() {
   snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
 }
 
-// Draw the snake on the canvas
 function drawSnake() {
   snake.forEach(drawSnakePart);
 }
