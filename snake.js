@@ -58,7 +58,7 @@ function move_snake() {
   snake.pop();
 }
 
-function change_direction() {
+function change_direction(event) {
 
     const LEFT_KEY = 37;
     const RIGHT_KEY = 39,
@@ -71,5 +71,22 @@ function change_direction() {
     const goingDOWN = dy === 10;
     const goingRIGHT = dx === 10;
     const goingLEFT = dx === -10;
+
+    if (keyPressed === LEFT_KEY && !goingRIGHT ) {
+        dx = -10;
+        dy = 0;
+    } 
+    if (keyPressed === RIGHT_KEY && !goingLEFT ) {
+        dx = 10;
+        dy = 0;
+    } 
+    if (keyPressed === UP_KEY && !goingDOWN ) {
+        dx = 0;
+        dy = -10;
+    } 
+    if (keyPressed === DOWN_KEY && !goingUP ) {
+        dx = 0;
+        dy = 10;
+    } 
 
 }
