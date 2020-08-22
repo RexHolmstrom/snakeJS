@@ -57,3 +57,19 @@ function move_snake() {
   snake.unshift(head);
   snake.pop();
 }
+
+function change_direction() {
+
+    const LEFT_KEY = 37;
+    const RIGHT_KEY = 39,
+    const DOWN_KEY = 38,
+    const UP_KEY = 40,
+
+
+    const keyPressed = event.keyCode;
+    const goingUP = dy === -10;
+    const goingDOWN = dy === 10;
+    const goingRIGHT = dx === 10;
+    const goingLEFT = dx === -10;
+
+}
