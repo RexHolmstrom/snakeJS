@@ -83,10 +83,12 @@ function random_food(min, max) {
 }
 
 function gen_food() {
+  // Generate a random number the food x-coordinate
   food_x = random_food(0, snakeboard.width - 10);
+  // Generate a random number for the food y-coordinate
   food_y = random_food(0, snakeboard.height - 10);
   snake.forEach(function has_snake_eaten_food(part) {
-    const has_eaten = part.x == food_x && part.y == food.y;
+    const has_eaten = part.x == food_x && part.y == food_y;
     if (has_eaten) gen_food();
   });
 }
