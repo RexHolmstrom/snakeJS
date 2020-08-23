@@ -35,7 +35,7 @@ function main() {
     drawFood();
     move_snake();
     drawSnake();
-    // Call main again
+    // Repeat
     main();
   }, 100);
 }
@@ -81,7 +81,7 @@ function has_game_ended() {
 }
 
 function random_food(min, max) {
-  return (Math.round(Math.random() * (min - max) + min) / 10) * 10;
+  return Math.round((Math.random() * (min - max) + min) / 10) * 10;
 }
 
 function gen_food() {
