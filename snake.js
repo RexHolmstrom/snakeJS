@@ -42,9 +42,7 @@ function main() {
 
 // Draw a border around the canvas
 function clear_board() {
-  //  Select the colour to fill the drawing
   snakeboard_ctx.fillStyle = board_background;
-  //  Select the colour for the border of the canvas
   snakeboard_ctx.strokestyle = board_border;
   snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
   snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
@@ -81,7 +79,7 @@ function has_game_ended() {
 }
 
 function random_food(min, max) {
-  return Math.round((Math.random() * (min - max) + min) / 10) * 10;
+  return Math.round((Math.random() * (max - min) + min) / 10) * 10;
 }
 
 function gen_food() {
